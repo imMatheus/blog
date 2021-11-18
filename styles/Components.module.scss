@@ -1,6 +1,13 @@
 .centeredView {
     max-width: 82ch;
-    @apply px-3 mx-auto;
+    @apply px-3 mx-auto pb-5 pt-2 relative;
+
+    h1 {
+        @apply text-5xl font-bold mb-2;
+        & + p {
+            margin-top: 0px;
+        }
+    }
 
     h2 {
         @apply text-3xl font-bold;
@@ -20,4 +27,9 @@
 
 .code {
     @apply mt-5;
+}
+
+.image {
+    width: 100px !important;
+    height: 100px !important;
 }

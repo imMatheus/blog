@@ -21,7 +21,8 @@
             "@/context/*": ["context/*"],
             "@/types/*": ["types/*"],
             "@/hooks/*": ["hooks/*"],
-            "styles/*": ["styles/*"]
+            "styles/*": ["styles/*"],
+            "public/*": ["public/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
