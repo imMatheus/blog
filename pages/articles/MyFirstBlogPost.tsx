@@ -7,14 +7,13 @@ import CodeBlock from '@/components/Code'
 const MyFirstBlogPost: NextPage = () => {
     return (
         <CenteredView>
+            <h2>my first title</h2>
             <p>
-                Lorem ipsum
-                <Italic> hello wolrd </Italic>
-                alias sequi consequuntur magnam dignissimos incidunt eveniet
-                error beatae impedit, non recusandae voluptatibus enim, quam id
-                ad eligendi, eius provident at. Porro animi at distinctio
-                voluptatem iste nobis iure magni deleniti ipsum quam voluptatum
-                consequatur vitae in quasi autem odio nihil maiores,
+                Lorem ipsum alias sequi consequuntur magnam dignissimos incidunt
+                eveniet error beatae impedit, non recusandae voluptatibus enim,
+                quam id ad eligendi, eius provident at. Porro animi at
+                distinctio voluptatem iste nobis iure magni deleniti ipsum quam
+                voluptatum consequatur vitae in quasi autem odio nihil maiores,
                 exercitationem numquam tempora. Adipisci, atque? Saepe hic quasi
                 in, ea veniam consequuntur laborum sequi fugit possimus repellat
                 incidunt dignissimos, perspiciatis voluptatum impedit illum
@@ -25,7 +24,9 @@ const MyFirstBlogPost: NextPage = () => {
                 facilis cumque provident autem quibusdam? Sed eligendi itaque,
                 repellendus architecto quasi ducimus?
             </p>
-            <CodeBlock>console.log(hello world)</CodeBlock>
+            <CodeBlock gist='575cc36024e95bae27d49273397dffed' />
+            <h2>My title</h2>
+
             <p>
                 Lorem ipsum
                 <Italic> hello wolrd </Italic>

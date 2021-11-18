@@ -1,12 +1,23 @@
 .centeredView {
-    max-width: 70ch;
-    @apply bg-gray-100 px-3 mx-auto;
+    max-width: 82ch;
+    @apply px-3 mx-auto;
+
+    h2 {
+        @apply text-3xl font-bold;
+        & + p {
+            margin-top: 0px;
+        }
+    }
 
     p {
-        @apply text-lg mt-4;
+        @apply text-lg mt-5 font-light;
     }
 
     span.italic {
         background: #f00 !important;
     }
+}
+
+.code {
+    @apply mt-5;
 }

@@ -1,10 +1,15 @@
 import React from 'react'
 import Gist from 'react-gist'
+import styles from 'styles/Components.module.scss'
 
-const Code: React.FC = ({ children }) => {
+interface Props {
+    gist: string
+}
+
+const Code: React.FC<Props> = ({ gist }) => {
     return (
-        <div className='mt-3'>
-            <Gist id='3c734fd5abfbf13587777eda3c34eabe' />
+        <div className={styles.code}>
+            <Gist id={gist} />
         </div>
     )
 }
