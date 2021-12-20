@@ -9,6 +9,7 @@ import getConfig from 'next/config'
 const { serverRuntimeConfig } = getConfig()
 import Head from 'next/Head'
 import { useRouter } from 'next/router'
+
 export const getStaticPaths: GetStaticPaths = async () => {
     const files = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'))
 
