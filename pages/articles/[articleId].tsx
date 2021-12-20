@@ -5,9 +5,11 @@ import fs from 'fs'
 import path from 'path'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
+import getConfig from 'next/config'
+const { serverRuntimeConfig } = getConfig()
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const files = fs.readdirSync(path.join(process.cwd(), './articles'))
+    const files = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'))
 
     return {
         paths: files?.map((file) => ({
@@ -21,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const markdown = fs.readFileSync(
-        path.join(process.cwd(), `articles/${context.params?.articleId}`),
+        path.join(serverRuntimeConfig.PROJECT_ROOT, `articles/${context.params?.articleId}`),
         'utf8'
     )
 

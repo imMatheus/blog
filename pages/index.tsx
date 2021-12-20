@@ -3,12 +3,14 @@ import path from 'path'
 import { GetStaticProps } from 'next'
 import fs from 'fs'
 import Link from 'next/link'
+import getConfig from 'next/config'
+const { serverRuntimeConfig } = getConfig()
 interface Props {
     files: Array<{ articleId: string }>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const files = fs.readdirSync(path.join(process.cwd(), './articles'))
+    const files = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'))
 
     return {
         props: {
