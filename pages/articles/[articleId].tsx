@@ -10,9 +10,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const files = fs.readdirSync(path.join(process.cwd(), './articles'))
 
     return {
-        paths: files.map((file) => ({
+        paths: files?.map((file) => ({
             params: {
-                articleId: file.toLowerCase().trim().replace(' ', '-'),
+                articleId: file?.toLowerCase()?.trim()?.replaceAll(' ', '-'),
             },
         })),
         fallback: false,
