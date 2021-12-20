@@ -42,11 +42,11 @@ const Home: NextPage<Props> = ({ files }) => {
                                 <div className='cursor-pointer py-2 pl-3 mb-4 border-l-2 border-l-teal-300 bg-teal-700/10'>
                                     <h3 className='!m-0'>
                                         {(
-                                            articleId.charAt(0).toUpperCase() +
+                                            articleId.charAt(0)?.toUpperCase() +
                                             articleId.slice(1)
                                         )
-                                            .replace('.md', '')
-                                            .replaceAll('-', ' ')}
+                                            ?.replace('.md', '')
+                                            ?.replaceAll('-', ' ')}
                                     </h3>
                                 </div>
                             </Link>
