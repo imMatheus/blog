@@ -5,7 +5,6 @@ import fs from 'fs'
 import Link from 'next/link'
 import getConfig from 'next/config'
 const { serverRuntimeConfig } = getConfig()
-import Head from 'next/Head'
 interface Props {
     files: Array<{ articleId: string }>
 }
@@ -25,9 +24,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Home: NextPage<Props> = ({ files }) => {
     return (
         <main className='bg-slate-50 dark:bg-slate-900 min-h-screen'>
-            <Head>
-                <title>Matu&apos;s blog</title>
-            </Head>
             <article className='py-24 sm:py-40 max-w-5xl mx-auto'>
                 <div
                     className='mt-16 px-6 mx-auto prose prose-slate dark:prose-invert

@@ -7,8 +7,6 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import getConfig from 'next/config'
 const { serverRuntimeConfig } = getConfig()
-import Head from 'next/Head'
-import { useRouter } from 'next/router'
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const files = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'))
@@ -41,7 +39,6 @@ interface Props {
 }
 
 const Article: NextPage<Props> = ({ markdown }) => {
-    const router = useRouter()
     const divRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -69,22 +66,8 @@ const Article: NextPage<Props> = ({ markdown }) => {
         }
     }, [markdown])
 
-    const id = Array.isArray(router.query.articleId)
-        ? router.query.articleId[0]
-        : router.query.articleId
-
     return (
         <main className='bg-slate-50 dark:bg-slate-900 '>
-            <Head>
-                <title>
-                    {id
-                        ? (id?.charAt(0).toUpperCase() + id?.slice(1))
-                              ?.replace('.md', '')
-                              ?.replaceAll('-', ' ')
-                        : ''}{' '}
-                    | Matu&apos;s blog
-                </title>
-            </Head>
             <article className='py-24 sm:py-40 max-w-5xl mx-auto'>
                 <div
                     className='mt-16 px-6 mx-auto prose prose-slate dark:prose-invert
