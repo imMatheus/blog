@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: files?.map((file) => ({
             params: {
-                articleId: file?.toLowerCase()?.trim()?.replaceAll(' ', '-'),
+                articleId: file,
             },
         })),
         fallback: false,

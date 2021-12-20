@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     return {
         props: {
             files: files?.map((file) => ({
-                articleId: file?.toLowerCase()?.trim()?.replaceAll(' ', '-'),
+                articleId: file,
             })),
         },
     }
@@ -34,7 +34,7 @@ const Home: NextPage<Props> = ({ files }) => {
                 >
                     <h1>Matu&apos;s blog</h1>
                     <h2>All articles</h2>
-                    {files.map(({ articleId }) => {
+                    {files?.map(({ articleId }) => {
                         return (
                             <Link href={`/articles/${articleId}`} passHref={true} key={articleId}>
                                 <div className='cursor-pointer py-2 pl-3 mb-4 border-l-2 border-l-teal-300 bg-teal-700/10'>
