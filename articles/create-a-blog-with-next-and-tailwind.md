@@ -52,8 +52,6 @@ module.exports = {
 
 ```
 
-[heading](#h1)
-
 Lets add some articles! In the root of your project create a new folder called `articles` and inside it create a new file called `first-blog-post.md`. All of your articles are going to be _markdown_ files. So lets add some markdown to this article:
 
 ````markdown
