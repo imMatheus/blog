@@ -6,7 +6,7 @@ Centering a div is a lot easier then you might think, i promise 😃
 <div class="center-me"></div>
 ```
 
-#### Option 1, style the parent
+### Option 1, style the parent
 
 ```css
 body {
@@ -29,7 +29,7 @@ body {
 
 Applying `display: flex` to the body element will control how the children are aligned. `justify-content: center` centers all the children on the horizontal axis, `align-items: center` centers all the children on the vertical axis. Similarly, `display: grid` controls how its direct children are layout, `place-items: center` sets the alignment both horizontally and vertically.
 
-#### Option 2, absolute positioning
+### Option 2, absolute positioning
 
 ```css
 .center-me {[s&s]
@@ -42,7 +42,7 @@ Applying `display: flex` to the body element will control how the children are a
 
 The only prerequisite for this technic is that the parent element has a `position: relativ`, otherwise the `center-me` div will be centered in relation to the entire screen.
 
-#### Option 3, margins
+### Option 3, margins
 
 ```css
 .center-me {

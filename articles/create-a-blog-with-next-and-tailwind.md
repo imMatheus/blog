@@ -2,7 +2,7 @@
 
 I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
 
-_Lets start by creating a new **next** project:_
+Lets start by creating a new **Next.js** project:
 
 ```bash
 npx create-next-app@latest
@@ -10,14 +10,14 @@ npx create-next-app@latest
 yarn create next-app
 ```
 
-_Add **tailwind** to the project:_
+Add **tailwind** to the project:
 
 ```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 
-_In your `styles/global.css` make sure to add the following lines:_
+In your `styles/global.css` make sure to add the following lines:
 
 ```css
 @tailwind base;
@@ -25,13 +25,13 @@ _In your `styles/global.css` make sure to add the following lines:_
 @tailwind utilities;
 ```
 
-_Install `@tailwind/typography`_
+Install `@tailwind/typography`
 
 ```bash
 npm i @tailwind/typography
 ```
 
-_Now in the `tailwind.config.js` file add the the `@tailwind/typography` to the **plugins** array_
+Now in the `tailwind.config.js` file add the the `@tailwind/typography` to the **plugins** array
 
 ```js
 module.exports = {
@@ -52,14 +52,16 @@ module.exports = {
 
 ```
 
-_Lets add some articles! In the root of your project create a new folder called `articles` and inside it create a new file called `first-blog-post.md`. All of your articles are going to be *markdown* files. So lets add some markdown to this article:_
+[heading](#h1)
+
+Lets add some articles! In the root of your project create a new folder called `articles` and inside it create a new file called `first-blog-post.md`. All of your articles are going to be _markdown_ files. So lets add some markdown to this article:
 
 ````markdown
 # My first ever blog post
 
 This is just some dummy text.
 
-Here is some _javascript_ `code`:
+Here is some javascript `code`:
 
 ```js
 const x = 10
@@ -67,7 +69,7 @@ console.log('hello world')
 ```
 ````
 
-_Now lets work on showing our articles to the user. First we'll need add *two* packages. `marked` for turning our *.md* files into html elements and `highlight.js` for highlighting code blocks:_
+Now lets work on showing our articles to the user. First we'll need add _two_ packages. `marked` for turning our _.md_ files into html elements and `highlight.js` for highlighting code blocks:
 
 ```bash
 npm i marked highlight.js
@@ -75,7 +77,7 @@ npm i marked highlight.js
 yarn add marked highlight.js
 ```
 
-_To change the color your code-blocks have add the following line to the `pages/_app.js` file:_
+To change the color your code-blocks have add the following line to the `pages/app.js` file:
 
 ```js
 import '../styles/globals.css'
@@ -89,7 +91,7 @@ export default MyApp
 
 ```
 
-_Lets start writing some *react* code. In the `pages` directory, create a new folder called `articles` and create a new file inside that folder called `[articleId].jsx`. In that file add the following code:_
+Lets start writing some _react_ code. In the `pages` directory, create a new folder called `articles` and create a new file inside that folder called `[articleId].jsx`. In that file add the following code:
 
 ```js
 import React, { useEffect, useRef } from 'react'
