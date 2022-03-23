@@ -70,7 +70,7 @@ const Article: NextPage<Props> = ({ markdown }) => {
         <main className='bg-slate-50 dark:bg-slate-900 '>
             <article className='py-24 sm:py-40 max-w-5xl mx-auto'>
                 <div
-                    className='mt-16 px-6 mx-auto prose prose-slate dark:prose-invert
+                    className='mt-18 px-6 mx-auto prose prose-slate dark:prose-invert
                      prose-pre:bg-[#011627] lg:prose-xl xl:prose-xl sm:prose-sm md:prose-md
                     prose-code:text-teal-600 dark:prose-code:text-teal-500 prose-code:bg-teal-100/50 dark:prose-code:bg-teal-800/10
                       prose-headings:text-blue-800 dark:prose-headings:text-blue-600
