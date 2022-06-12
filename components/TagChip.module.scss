@@ -1,0 +1,26 @@
+.chip {
+	@apply rounded-lg px-2 text-sm;
+}
+
+.firebase {
+	color: white;
+	background-color: #f5820d;
+}
+
+.css {
+	color: white;
+	background-color: #264de4;
+}
+
+.tutorial {
+	@apply bg-neutral-700 text-white;
+}
+
+.tailwind {
+	background-color: #0ea5e9;
+	color: white;
+}
+
+.nextjs {
+	@apply bg-black text-white;
+}

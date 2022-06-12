@@ -1,3 +1,9 @@
+---
+title: Create a blog with next.js and tailwind
+date: 2022-06-12
+tags: [nextjs, tailwind, tutorial]
+---
+
 # Create a blog with next.js and tailwind
 
 I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
@@ -91,7 +97,7 @@ export default MyApp
 
 Lets start writing some _react_ code. In the `pages` directory, create a new folder called `articles` and create a new file inside that folder called `[articleId].jsx`. In that file add the following code:
 
-```js
+```tsx
 import React, { useEffect, useRef } from 'react'
 import fs from 'fs'
 import path from 'path'
@@ -100,83 +106,80 @@ import hljs from 'highlight.js'
 
 // generating all the paths
 export const getStaticPaths = async () => {
-    // read all files in the articles folder
-    const files = fs.readdirSync(path.join(process.cwd(), './articles'))
+	// read all files in the articles folder
+	const files = fs.readdirSync(path.join(process.cwd(), './articles'))
 
-    return {
-        paths: files.map((file) => ({
-            params: {
-                // if you changed the name of this to something other then [articleId].js
-                articleId: file.toLowerCase().trim().replace(' ', '-'),
-            },
-        })),
-        // all other paths will return a 404 error
-        fallback: false,
-    }
+	return {
+		paths: files.map((file) => ({
+			params: {
+				// if you changed the name of this to something other then [articleId].js
+				articleId: file.toLowerCase().trim().replace(' ', '-')
+			}
+		})),
+		// all other paths will return a 404 error
+		fallback: false
+	}
 }
 
 export const getStaticProps = async (context) => {
-    // read the given file
-    const markdown = fs.readFileSync(
-        path.join(process.cwd(), `articles/${context.params?.articleId}`),
-        'utf8'
-    )
+	// read the given file
+	const markdown = fs.readFileSync(path.join(process.cwd(), `articles/${context.params?.articleId}`), 'utf8')
 
-    return {
-        // return the given file in the props pargument
-        props: {
-            markdown,
-        },
-    }
+	return {
+		// return the given file in the props pargument
+		props: {
+			markdown
+		}
+	}
 }
 
 const Article = ({ markdown }) => {
-    const divRef = useRef(null)
+	const divRef = useRef(null)
 
-    useEffect(() => {
-        if (divRef.current) {
-            // default settings for the the marked renderer
-            marked.setOptions({
-                renderer: new marked.Renderer(),
-                highlight: function (code, lang) {
-                    const language = hljs.getLanguage(lang) ? lang : 'plaintext'
-                    return hljs.highlight(code, { language }).value
-                },
-                langPrefix: 'hljs language-',
-                pedantic: false,
-                gfm: true,
-                breaks: false,
-                sanitize: false,
-                smartLists: true,
-                smartypants: false,
-                xhtml: false,
-            })
+	useEffect(() => {
+		if (divRef.current) {
+			// default settings for the the marked renderer
+			marked.setOptions({
+				renderer: new marked.Renderer(),
+				highlight: function (code, lang) {
+					const language = hljs.getLanguage(lang) ? lang : 'plaintext'
+					return hljs.highlight(code, { language }).value
+				},
+				langPrefix: 'hljs language-',
+				pedantic: false,
+				gfm: true,
+				breaks: false,
+				sanitize: false,
+				smartLists: true,
+				smartypants: false,
+				xhtml: false
+			})
 
-            // need to set the innerHTML as just setting it in the div, e.g (<div>{marked.parse(markdown)}</div>)
-            // will result as just plain text
-            divRef.current.innerHTML = marked.parse(markdown)
-        }
-    }, [markdown])
+			// need to set the innerHTML as just setting it in the div, e.g (<div>{marked.parse(markdown)}</div>)
+			// will result as just plain text
+			divRef.current.innerHTML = marked.parse(markdown)
+		}
+	}, [markdown])
 
-    return (
-        <main className='bg-slate-50 dark:bg-slate-900 '>
-            <article className='py-40 max-w-5xl mx-auto'>
-                {/* 
+	return (
+		<main className="bg-slate-50 dark:bg-slate-900 ">
+			<article className="mx-auto max-w-5xl py-40">
+				{/*
                 here is were the real magic happens,
                 the 'prose' class is what takes care of all the styling needed.
                 It's highly customisable as you can see by all the classes
                 */}
-                <div
-                    className='mt-16 px-6 mx-auto prose prose-slate dark:prose-invert
-                      prose-pre:bg-[#011627] lg:prose-xl xl:prose-xl sm:prose-sm md:prose-md
-                      prose-code:text-teal-600 dark:prose-code:text-teal-500 prose-code:bg-teal-100/50 dark:prose-code:bg-teal-800/10
-                      prose-headings:text-blue-800 dark:prose-headings:text-blue-600
-                     '
-                    ref={divRef}
-                ></div>
-            </article>
-        </main>
-    )
+				<div
+					className="md:prose-md prose prose-slate prose-headings:text-blue-800 prose-code:bg-teal-100/50 prose-code:text-teal-600
+                      prose-pre:bg-[#011627] dark:prose-invert dark:prose-headings:text-blue-600 dark:prose-code:bg-teal-800/10 dark:prose-code:text-teal-500
+                      sm:prose-sm lg:prose-xl xl:prose-xl mx-auto
+                      mt-16 px-6
+                     "
+					ref={divRef}
+				></div>
+			</article>
+		</main>
+	)
 }
 
 export default Article

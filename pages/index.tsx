@@ -1,52 +1,41 @@
 import type { NextPage } from 'next'
 import path from 'path'
 import { GetStaticProps } from 'next'
+import matter from 'gray-matter'
 import fs from 'fs'
-import Link from 'next/link'
 import getConfig from 'next/config'
+import ArticlesGrid from '@/components/ArticlesGrid'
+import { Article } from '@/types/Article'
+
 const { serverRuntimeConfig } = getConfig()
+
 interface Props {
-    files: Array<{ articleId: string }>
+	articles: Article[]
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const files = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'))
+	const fileNames = fs.readdirSync(path.join(serverRuntimeConfig.PROJECT_ROOT, './articles'), 'utf8')
 
-    return {
-        props: {
-            files: files?.map((file) => ({
-                articleId: file,
-            })),
-        },
-    }
+	const articles: Article[] = fileNames.map((name) => {
+		const str = fs.readFileSync(path.join(serverRuntimeConfig.PROJECT_ROOT, `articles/${name}`), 'utf8')
+		const { data } = matter(str)
+
+		return JSON.parse(JSON.stringify({ ...data, fileName: name })) as Article
+	})
+
+	return {
+		props: {
+			articles: articles
+		}
+	}
 }
 
-const Home: NextPage<Props> = ({ files }) => {
-    return (
-        <main className='bg-slate-50 dark:bg-slate-900 min-h-screen'>
-            <article className='py-24 sm:py-40 max-w-5xl mx-auto'>
-                <div
-                    className='mt-16 px-6 mx-auto prose prose-slate dark:prose-invert
-                     prose-pre:bg-[#011627] lg:prose-xl xl:prose-xl sm:prose-sm md:prose-md
-                    prose-code:text-teal-600 dark:prose-code:text-teal-500 prose-code:bg-teal-100/50 dark:prose-code:bg-teal-800/10
-                      prose-headings:text-blue-800 dark:prose-headings:text-blue-600
-                     '
-                >
-                    <h1>Matu&apos;s blog</h1>
-                    <h2>All articles</h2>
-                    {files?.map(({ articleId }) => {
-                        return (
-                            <Link href={`/articles/${articleId}`} passHref={true} key={articleId}>
-                                <div className='cursor-pointer py-2 pl-3 mb-4 border-l-2 border-l-teal-300 bg-teal-700/10'>
-                                    <h3 className='!m-0'>{articleId}</h3>
-                                </div>
-                            </Link>
-                        )
-                    })}
-                </div>
-            </article>
-        </main>
-    )
+const Home: NextPage<Props> = ({ articles }) => {
+	return (
+		<main>
+			<ArticlesGrid articles={articles} />
+		</main>
+	)
 }
 
 export default Home

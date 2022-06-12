@@ -1,0 +1,31 @@
+---
+title: 5 Improvent ideas for firebase
+date: 2022-06-12
+tags: [ideas, firebase]
+---
+
+# 5 Improvent ideas for firebase
+
+I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
+
+Lets start by creating a new **Next.js** project:
+
+```bash
+npx create-next-app@latest
+# or
+yarn create next-app
+```
+
+## Projcetion
+
+I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
+
+Lets start by creating a new **Next.js** project:
+
+```js
+import { collection, query, getDocs, projection } from 'firebase/firestore'
+import { db } from './firebase'
+
+const q = query(collection(db, 'users'), projection({ name: 1, age: 1 }))
+const querySnapshot = await getDocs(q)
+```
