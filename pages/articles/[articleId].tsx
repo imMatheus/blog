@@ -4,7 +4,6 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import fs from 'fs'
 import path from 'path'
 import { marked } from 'marked'
-
 import matter from 'gray-matter'
 import hljs from 'highlight.js'
 import getConfig from 'next/config'
