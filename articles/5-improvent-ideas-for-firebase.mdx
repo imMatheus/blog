@@ -6,19 +6,54 @@ tags: [ideas, firebase]
 
 # 5 Improvent ideas for firebase
 
-I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
+## 1. Projcetion
 
-Lets start by creating a new **Next.js** project:
+Id esse corporis ipsam non quod? Explicabo inventore optio pariatur sequi quia fuga!
+Ex quo molestiae iure, dolorum officiis natus, illo repellendus excepturi asperiores dignissimos eos quis soluta magni alias quos eum,
+necessitatibus nobis hic ab ipsam non quod?
 
-```bash
-npx create-next-app@latest
-# or
-yarn create next-app
+```js
+import { collection, query, getDocs, projection } from 'firebase/firestore'
+import { db } from './firebase'
+
+const q = query(collection(db, 'users'), projection({ name: 1, age: 1 }))
+const querySnapshot = await getDocs(q)
 ```
 
-## Projcetion
+## 2. Where querys in security rules
 
-I recently created this website as place to share intresseting stuff i find in the realm of programing. I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt libero quam blanditiis sint eaque vero mollitia,
+officiis facere. Id esse corporis ipsam non quod? Explicabo inventore optio pariatur sequi quia fuga!
+Ex quo molestiae iure, dolorum officiis natus, illo repellendus excepturi asperiores dignissimos eos quis soluta magni alias quos eum,
+necessitatibus nobis hic ab ipsam non quod? Ad, quisquam?
+
+Obcaecati libero, maiores aliquid sapiente animi cum aliquam dicta, earum quibusdam
+perspiciatis minima tempore totam ducimus **deserunt iste officiis**. Iste repellendus earum repellat suscipit in architecto odio officia! Quibusdam,
+similique nesciunt harum aperiam sapiente quis aspernatur laborum laudantium rerum? Minima minus assumenda error magni, fugiat consectetur. Hic consectetur rem, rerum ducimus cum optio sed.
+Praesentium eos vel ab nobis. Aperiam voluptatum molestiae impedit at consequatur quam maxime voluptatem nemo delectus fugiat, veniam blanditiis eos error atque optio ratione quia.
+Illum fuga impedit adipisci suscipit, expedita deserunt nobis magni veniam et voluptatibus cumque temporibus, recusandae rem aut vero quidem eius sapiente sequi molestiae? Esse, ex ab vitae
+fugiat temporibus natus officia, provident quis explicabo, ad perspiciatis ea deleniti omnis qui quod? Facere obcaecati eius illo nobis cumque est nesciunt at, cupiditate dicta quas voluptate blanditiis illum labore fugit, repellat similique quibusdam in!
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if isSignedIn();
+    }
+  }
+}
+```
+
+## 3. Security rules formatter
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde consectetur asperiores mollitia, incidunt in, sunt architecto ab ipsam cum, laudantium iusto nesciunt porro? Laudantium
+magnam optio recusandae. Doloremque ipsum non inventore, quae totam quo quisquam, itaque harum officiis quam amet.
+
+## 4. Count number of documents in a collection
+
+I recently created this website as place to share intresseting stuff i find in the realm of programing.
+I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
 
 Lets start by creating a new **Next.js** project:
 
@@ -29,3 +64,11 @@ import { db } from './firebase'
 const q = query(collection(db, 'users'), projection({ name: 1, age: 1 }))
 const querySnapshot = await getDocs(q)
 ```
+
+## 5. SQL database
+
+Maiores aliquid sapiente animi cum aliquam dicta, earum quibusdam
+perspiciatis minima tempore totam ducimus **deserunt iste officiis**. Iste repellendus earum repellat suscipit in architecto odio officia! Quibusdam,
+similique nesciunt harum aperiam sapiente quis aspernatur laborum laudantium rerum? Minima minus assumenda error magni, fugiat consectetur. Hic consectetur rem, rerum ducimus cum optio sed.
+Praesentium eos vel ab nobis. Aperiam voluptatum molestiae impedit at consequatur quam maxime voluptatem nemo delectus fugiat, veniam blanditiis eos error atque optio ratione quia.
+Illum fuga impedit adipisci suscipit.
