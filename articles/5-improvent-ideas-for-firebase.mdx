@@ -8,11 +8,12 @@ tags: [ideas, firebase]
 
 ## 1. Projcetion
 
-Id esse corporis ipsam non quod? Explicabo inventore optio pariatur sequi quia fuga!
-Ex quo molestiae iure, dolorum officiis natus, illo repellendus excepturi asperiores dignissimos eos quis soluta magni alias quos eum,
-necessitatibus nobis hic ab ipsam non quod?
+Projection is a common feature in the vast majority of popular databases such as MongoDB and PostgreSQL that gives the option to only retrieve some fields from a document. This has two main crucial benefits, firstly it allows you to decrease the number of data that gets transferred to the client which would be very beneficial if you have a big user base that is mobile. Only selecting the fields you want would give a better user experience. The second reason projection is super useful is that this could be paired with a new rule in your security rules that would not allow certain fields to be retrieved in some scenarios. For example, let us say that you have a collection of users where every user could choose their profile to be public or private, if a user is public all fields should be accessible but if the user is private the email fields should not be accessible. This behavior is not possible at the moment in firestore, and the recommended way to mimic this behavior from the firestore documentation is to split up your data into two different documents which is a big pain to deal with and maintain.
+
+Here is an example of how the code for the javascript client SDK might look:
 
 ```js
+// example.js
 import { collection, query, getDocs, projection } from 'firebase/firestore'
 import { db } from './firebase'
 
@@ -20,26 +21,32 @@ const q = query(collection(db, 'users'), projection({ name: 1, age: 1 }))
 const querySnapshot = await getDocs(q)
 ```
 
-## 2. Where querys in security rules
+Here is an example of how the syntax for only accessing certain fields in your security rules might look:
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt libero quam blanditiis sint eaque vero mollitia,
-officiis facere. Id esse corporis ipsam non quod? Explicabo inventore optio pariatur sequi quia fuga!
-Ex quo molestiae iure, dolorum officiis natus, illo repellendus excepturi asperiores dignissimos eos quis soluta magni alias quos eum,
-necessitatibus nobis hic ab ipsam non quod? Ad, quisquam?
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if resource.data.visibility == 'private' &&
+                  ['email'] notin request.resource.data.retriviedKeys();
+    }
+  }
+}
+```
 
-Obcaecati libero, maiores aliquid sapiente animi cum aliquam dicta, earum quibusdam
-perspiciatis minima tempore totam ducimus **deserunt iste officiis**. Iste repellendus earum repellat suscipit in architecto odio officia! Quibusdam,
-similique nesciunt harum aperiam sapiente quis aspernatur laborum laudantium rerum? Minima minus assumenda error magni, fugiat consectetur. Hic consectetur rem, rerum ducimus cum optio sed.
-Praesentium eos vel ab nobis. Aperiam voluptatum molestiae impedit at consequatur quam maxime voluptatem nemo delectus fugiat, veniam blanditiis eos error atque optio ratione quia.
-Illum fuga impedit adipisci suscipit, expedita deserunt nobis magni veniam et voluptatibus cumque temporibus, recusandae rem aut vero quidem eius sapiente sequi molestiae? Esse, ex ab vitae
-fugiat temporibus natus officia, provident quis explicabo, ad perspiciatis ea deleniti omnis qui quod? Facere obcaecati eius illo nobis cumque est nesciunt at, cupiditate dicta quas voluptate blanditiis illum labore fugit, repellat similique quibusdam in!
+## 2. Where queries in security rules
+
+The security rules of firestore are great in the majority of ways but one thing I have found is that it is not possible to perform where queries. To find if a document exists that has a certain value. This would be very nice to have for making sure that a value is unique, for example, let us say that you have a collection of **users** and each user must have a unique **username**, I have yet to find a nice and easy way of doing this.
+
+Here is an example of how the syntax for this in your security rules might look:
 
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow read, write: if isSignedIn();
+      allow write: if !exists(/databases/$(database)/documents/users, where('username', '==', request.resource.data.username));
     }
   }
 }
@@ -47,8 +54,9 @@ service cloud.firestore {
 
 ## 3. Security rules formatter
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde consectetur asperiores mollitia, incidunt in, sunt architecto ab ipsam cum, laudantium iusto nesciunt porro? Laudantium
-magnam optio recusandae. Doloremque ipsum non inventore, quae totam quo quisquam, itaque harum officiis quam amet.
+This is pretty straightforward, as I write this I have yet to find a tool that can format my security rule and I would love to have it as it can get a bit messy with unformatted rules. This would just be a matter of adding a button to the navbar (as shown in the image down below) which would format it.
+
+<img src="/tes.png" alt="security rules formatter" />
 
 ## 4. Count number of documents in a collection
 
