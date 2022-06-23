@@ -23,8 +23,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 		return JSON.parse(JSON.stringify({ ...data, content, fileName: name })) as Article
 	})
 
-	console.log(articles)
-
 	return {
 		props: {
 			articles: articles.filter((f) => f.public === true).sort((a, b) => (a.date < b.date ? 1 : -1))
