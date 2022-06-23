@@ -63,7 +63,7 @@ This is pretty straightforward, as I write this I have yet to find a tool that c
 
 The ability to count the number of documents in a collection is a feature that I don't get how it can not be a thing. I am not sure how other databases like MongoDB do it, but a relatively straightforward implentaion would be to take the documents retrieved after the query and just return the array length instead of the array of documents. This way the amount of data sent to the client would be drastically minified. It may not be the best solution but at least it's a feature.
 
-Here is an example of how the syntax for this in your security rules might look:
+Here is an example of how the syntax for this might look:
 
 ```js
 import { collection, query, countDocs } from 'firebase/firestore'
