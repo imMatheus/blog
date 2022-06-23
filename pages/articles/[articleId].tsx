@@ -8,6 +8,8 @@ import matter from 'gray-matter'
 import hljs from 'highlight.js'
 import getConfig from 'next/config'
 import Head from 'next/head'
+import { generateLinkFromTitle } from '@/components/ArticleCard'
+
 const { serverRuntimeConfig } = getConfig()
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -72,6 +74,10 @@ const Article: NextPage<Props> = ({ markdown, title }) => {
 		<main>
 			<Head>
 				<title>{title} | Matus blog</title>
+
+				<meta property="og:title" content={title + '| Matus blog'} />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content={`https://matus-blog.vercel.app/articles/${generateLinkFromTitle(title)}`} />
 			</Head>
 			<article>
 				<div

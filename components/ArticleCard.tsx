@@ -9,7 +9,7 @@ interface ArticleCardProps {
 	index: number
 }
 
-function generateLinkFromTitle(title: string) {
+export function generateLinkFromTitle(title: string) {
 	return title.replace(/\s+/g, '-').split('.mdx')[0].toLowerCase()
 }
 
@@ -17,7 +17,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
 	console.log('hello vercel')
 	console.log(article.content)
 
-	const stripedText = article.content?.replaceAll(/\r?\n|\r/g, ' ') // removes all \t and \n from the text
+	const stripedText = article.content?.replace(/\r?\n|\r/g, ' ') // removes all \t and \n from the text
 	const stripedTextLength = stripedText.length // gets length of the striped text
 	const matches = stripedText.match(/```(.*?)```/g) // finds all code snippets, all text surrounded by 2 ```
 	const matchesLength = matches?.reduce((sum, match) => sum + match.length, 0) || 0 // get the length of the code snippets
