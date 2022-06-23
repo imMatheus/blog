@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Article } from '@/types/Article'
 import TagChip from './TagChip'
+import dateFormat from 'dateformat'
 
 interface ArticleCardProps {
 	article: Article
@@ -19,7 +20,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
 				<div className="flex-shrink-0 text-3xl font-bold opacity-30">{index < 10 ? '0' + index : index}</div>
 				<div className="space-y-1.5">
 					<p className="flex items-center gap-1.5 text-sm text-clr-text-grayed">
-						2 june<span className="block h-0.5 w-0.5 flex-shrink-0 rounded-full bg-clr-text-grayed"></span> 18 min read
+						{dateFormat(article.date, 'mmmm dS, yyyy')}
+						<span className="block h-0.5 w-0.5 flex-shrink-0 rounded-full bg-clr-text-grayed"></span> 18 min read
 					</p>
 					<p className="text-base font-bold">{article.title}</p>
 					<div className="flex flex-wrap gap-1">

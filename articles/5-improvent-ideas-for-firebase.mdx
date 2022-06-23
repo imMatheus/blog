@@ -1,6 +1,7 @@
 ---
 title: 5 Improvent ideas for firebase
-date: 2022-06-12
+date: 2022-06-18
+public: true
 tags: [ideas, firebase]
 ---
 
@@ -54,29 +55,24 @@ service cloud.firestore {
 
 ## 3. Security rules formatter
 
-This is pretty straightforward, as I write this I have yet to find a tool that can format my security rule and I would love to have it as it can get a bit messy with unformatted rules. This would just be a matter of adding a button to the navbar (as shown in the image down below) which would format it.
+This is pretty straightforward, as I write this I have yet to find a tool that can format my security rules and I would love to have it as it can get a bit messy with unformatted rules. This would just be a matter of adding a button to the navbar (as shown in the image down below) which would format it.
 
 <img src="/tes.png" alt="security rules formatter" />
 
 ## 4. Count number of documents in a collection
 
-I recently created this website as place to share intresseting stuff i find in the realm of programing.
-I thought it would be good to share how I created this blog if anyone was intresseting in doing something similarly.
+The ability to count the number of documents in a collection is a feature that I don't get how it can not be a thing. I am not sure how other databases like MongoDB do it, but a relatively straightforward implentaion would be to take the documents retrieved after the query and just return the array length instead of the array of documents. This way the amount of data sent to the client would be drastically minified. It may not be the best solution but at least it's a feature.
 
-Lets start by creating a new **Next.js** project:
+Here is an example of how the syntax for this in your security rules might look:
 
 ```js
-import { collection, query, getDocs, projection } from 'firebase/firestore'
+import { collection, query, countDocs } from 'firebase/firestore'
 import { db } from './firebase'
 
-const q = query(collection(db, 'users'), projection({ name: 1, age: 1 }))
-const querySnapshot = await getDocs(q)
+const q = query(collection(db, 'users'))
+const querySnapshot = await countDocs(q)
 ```
 
-## 5. SQL database
+## 5. Full text search
 
-Maiores aliquid sapiente animi cum aliquam dicta, earum quibusdam
-perspiciatis minima tempore totam ducimus **deserunt iste officiis**. Iste repellendus earum repellat suscipit in architecto odio officia! Quibusdam,
-similique nesciunt harum aperiam sapiente quis aspernatur laborum laudantium rerum? Minima minus assumenda error magni, fugiat consectetur. Hic consectetur rem, rerum ducimus cum optio sed.
-Praesentium eos vel ab nobis. Aperiam voluptatum molestiae impedit at consequatur quam maxime voluptatem nemo delectus fugiat, veniam blanditiis eos error atque optio ratione quia.
-Illum fuga impedit adipisci suscipit.
+I find it a bit obscured that Firebase, maintained by Google which is the world's biggest search engine and also owns youtube the world's second-biggest search engine, still doesn't have a native way to search thru your documents. Not much more to say here, just please Firebase introduce something to enable the developers to search thru the documents.

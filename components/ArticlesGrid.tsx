@@ -10,7 +10,7 @@ const ArticlesGrid: React.FC<ArticlesGridProps> = ({ articles }) => {
 	return (
 		<div className="grid gap-x-2 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
 			{articles?.map((article, i) => (
-				<ArticleCard article={article} index={i + 1} key={article.title + '-' + article.title} />
+				<ArticleCard article={article} index={i + 1} key={article.date + '_' + article.title} />
 			))}
 		</div>
 	)

@@ -1,6 +1,7 @@
 ---
 title: Create a blog with next.js and tailwind
 date: 2022-06-12
+public: true
 tags: [nextjs, tailwind, tutorial]
 ---
 
@@ -41,21 +42,17 @@ Now in the `tailwind.config.js` file add the the `@tailwind/typography` to the *
 
 ```js
 module.exports = {
-    mode: 'jit',
-    purge: [
-        './pages/**/*.{js,ts,jsx,tsx}',
-        './components/**/*.{js,ts,jsx,tsx}',
-    ],
-    darkMode: false, // or 'media' or 'class'
-    theme: {
-        extend: {},
-    },
-    variants: {
-        extend: {},
-    },[s&s]
-    plugins: [require('@tailwindcss/typography')],
+	mode: 'jit',
+	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+	darkMode: false, // or 'media' or 'class'
+	theme: {
+		extend: {}
+	},
+	variants: {
+		extend: {}
+	},
+	plugins: [require('@tailwindcss/typography')]
 }
-
 ```
 
 Lets add some articles! In the root of your project create a new folder called `articles` and inside it create a new file called `first-blog-post.md`. All of your articles are going to be _markdown_ files. So lets add some markdown to this article:
@@ -85,14 +82,13 @@ To change the color your code-blocks have add the following line to the `pages/a
 
 ```js
 import '../styles/globals.css'
-[s&s]import 'highlight.js/styles/night-owl.css'
+import 'highlight.js/styles/night-owl.css'
 
 function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />
+	return <Component {...pageProps} />
 }
 
 export default MyApp
-
 ```
 
 Lets start writing some _react_ code. In the `pages` directory, create a new folder called `articles` and create a new file inside that folder called `[articleId].jsx`. In that file add the following code:

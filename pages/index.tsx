@@ -18,14 +18,16 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
 	const articles: Article[] = fileNames.map((name) => {
 		const str = fs.readFileSync(path.join(serverRuntimeConfig.PROJECT_ROOT, `articles/${name}`), 'utf8')
-		const { data } = matter(str)
+		const { data, content } = matter(str)
 
-		return JSON.parse(JSON.stringify({ ...data, fileName: name })) as Article
+		return JSON.parse(JSON.stringify({ ...data, content, fileName: name })) as Article
 	})
+
+	console.log(articles)
 
 	return {
 		props: {
-			articles: articles
+			articles: articles.filter((f) => f.public === true).sort((a, b) => (a.date < b.date ? 1 : -1))
 		}
 	}
 }

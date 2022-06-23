@@ -1,6 +1,7 @@
 ---
 title: How to center a div with css
-date: 2022-06-12
+date: 2022-06-11
+public: true
 tags: [css, tutorial]
 ---
 
@@ -18,9 +19,9 @@ Centering a div is a lot easier then you might think, i promise 😃
 ```css
 body {
 	width: 100vw;
-<	height: 100vh;
-<	display: flex;
-<	justify-content: center;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -28,8 +29,8 @@ body {
 
 body {
 	width: 100vw;
-	[s&s]height: 100vh;
-	[s&s]display: grid;
+	height: 100vh;
+	display: grid;
 	place-items: center;
 }
 ```
@@ -39,11 +40,11 @@ Applying `display: flex` to the body element will control how the children are a
 ### Option 2, absolute positioning
 
 ```css
-.center-me {[s&s]
-    [s&s]position: absolute;
-    [s&s]top: 50%;
-    [s&s]left: 50%;
-    transform: translate(-50%, -50%);
+.center-me {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 ```
 
