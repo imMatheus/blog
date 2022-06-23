@@ -14,6 +14,9 @@ function generateLinkFromTitle(title: string) {
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
+	console.log('hello vercel')
+	console.log(article.content)
+
 	const stripedText = article.content?.replaceAll(/\r?\n|\r/g, ' ') // removes all \t and \n from the text
 	const stripedTextLength = stripedText.length // gets length of the striped text
 	const matches = stripedText.match(/```(.*?)```/g) // finds all code snippets, all text surrounded by 2 ```
