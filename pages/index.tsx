@@ -6,6 +6,7 @@ import fs from 'fs'
 import getConfig from 'next/config'
 import ArticlesGrid from '@/components/ArticlesGrid'
 import { Article } from '@/types/Article'
+import Head from 'next/head'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -33,6 +34,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Home: NextPage<Props> = ({ articles }) => {
 	return (
 		<main>
+			<Head>
+				<title>Matus blog</title>
+			</Head>
 			<ArticlesGrid articles={articles} />
 		</main>
 	)

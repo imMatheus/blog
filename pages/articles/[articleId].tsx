@@ -7,6 +7,7 @@ import { marked } from 'marked'
 import matter from 'gray-matter'
 import hljs from 'highlight.js'
 import getConfig from 'next/config'
+import Head from 'next/head'
 const { serverRuntimeConfig } = getConfig()
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -22,7 +23,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+interface Props {
+	title: string
+	markdown: string
+}
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
 	const str = fs.readFileSync(
 		path.join(serverRuntimeConfig.PROJECT_ROOT, `articles/${context.params?.articleId}.mdx`),
 		'utf8'
@@ -31,16 +37,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	return {
 		props: {
+			title: data.title,
 			markdown: content
 		}
 	}
 }
 
-interface Props {
-	markdown: string
-}
-
-const Article: NextPage<Props> = ({ markdown }) => {
+const Article: NextPage<Props> = ({ markdown, title }) => {
 	const divRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -67,6 +70,9 @@ const Article: NextPage<Props> = ({ markdown }) => {
 
 	return (
 		<main>
+			<Head>
+				<title>{title} | Matus blog</title>
+			</Head>
 			<article>
 				<div
 					className="prose prose-pre:border prose-pre:border-clr-border prose-pre:bg-[#fff] lg:prose-xl xl:prose-xl"
